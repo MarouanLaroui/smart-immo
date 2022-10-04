@@ -1,0 +1,39 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": ["airbnb-typescript/base"],
+        "rules": {
+            "no-underscore-dangle": [2, { "allow": ["_id"] }],
+            "import/prefer-default-export": "off",
+            "no-continue": "off",
+            "no-restricted-syntax": "off",
+            "eslint semi": ["error", "always"],
+            "@typescript-eslint/semi": ["error", "always"],
+            "import/no-extraneous-dependencies": "off",
+            "import/extensions": "off",
+            "import/no-unresolved": [0],
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": ["error"],
+            "default-param-last": "off",
+            "no-shadow": "off",
+            "@typescript-eslint/no-shadow": "error",
+            "no-redeclare": "off",
+            "@typescript-eslint/no-redeclare": ["error"],
+            "no-dupe-class-members": "off",
+            "import/order": "off",
+        }
+}
