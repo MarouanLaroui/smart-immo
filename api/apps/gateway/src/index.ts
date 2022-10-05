@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import kafkaTest from './kafka/kafkaConfig';
 
 /**
  * On créé une nouvelle "application" express
@@ -44,3 +45,4 @@ app.get('/', (req, res) => res.send('🏠'));
  * On demande à Express d'ecouter les requêtes sur le port défini dans la config
  */
 app.listen(3000, () => console.log('Silence, ça tourne.'));
+kafkaTest();
