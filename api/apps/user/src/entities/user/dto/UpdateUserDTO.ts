@@ -16,23 +16,23 @@ export default class CreateUserDTO {
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  lastname: string;
+  lastname?: string;
 
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  birthdate: string;
+  birthdate?: string;
 
   @IsOptional()
   @IsString()
   @IsEmail()
   @IsNotEmpty()
-  email: string;
+  email?: string;
 
   @IsOptional()
   @IsString()
   @Matches('')
-  password: string;
+  password?: string;
 
   constructor(
     firstname: string,
