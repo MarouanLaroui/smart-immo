@@ -2,9 +2,10 @@ import { validate } from 'class-validator';
 import { Request, Response } from 'express';
 import User from '../entities/user/User';
 import UserService from '../entities/user/User.service';
+import CreateUserDTO from '../entities/user/dto/CreateUserDTO';
 
 const getAllUsers = async (req: Request, res: Response) => {
-  return UserService.getUsers();
+  res.send(await UserService.getUsers());
 };
 
 const getOneUser = (req: Request, res: Response) => {
@@ -12,14 +13,21 @@ const getOneUser = (req: Request, res: Response) => {
 };
 
 const createNewUser = async (req: Request, res: Response) => {
-  const user = new User();
-  user.firstname = req.body.firstname;
-  user.lastname = req.body.lastname;
-  user.email = req.body.email;
-  user.birthdate = req.body.birthdate;
+  const userToCreate = new CreateUserDTO(
+    req.body.firstname,
+    req.body.lastname,
+    req.body.birthdate,
+    req.body.email,
+    req.body.password
+  );
 
-  const errors = await validate(user);
+  const errors = await validate(userToCreate);
+
   if (errors && errors.length > 0) {
+    res.send(errors);
+  } else {
+    const result = await UserService.createNewUser(userToCreate);
+    res.send(result);
   }
 };
 
@@ -31,10 +39,4 @@ const deleteOneUser = (req: Request, res: Response) => {
   res.send('Delete an existing workout');
 };
 
-module.exports = {
-  getAllUsers,
-  getOneUser,
-  createNewUser,
-  updateOneUser,
-  deleteOneUser,
-};
+export { getAllUsers, getOneUser, createNewUser, updateOneUser, deleteOneUser };

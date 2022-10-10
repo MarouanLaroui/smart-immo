@@ -41,7 +41,9 @@ if (process.env.MONGO_URI) {
 /**
  * Homepage (uniquement necessaire pour cette demo)
  */
-app.get('/auth', userRouter);
+app.use('/users', userRouter);
+
+app.get('/test', (req, res) => res.send('coucou'));
 
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur

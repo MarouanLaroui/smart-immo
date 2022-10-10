@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import IAuthenticable from './interfaces/IAuthenticable';
-import UserDTO from './UserDTO';
+import CreateUserDTO from './dto/CreateUserDTO';
 
 export default class User implements IAuthenticable {
   _id: Types.ObjectId;
@@ -9,13 +9,4 @@ export default class User implements IAuthenticable {
   birthdate: string;
   email: string;
   password: string;
-
-  toDTO(): UserDTO {
-    return new UserDTO(
-      this.firstname,
-      this.lastname,
-      this.birthdate,
-      this.email
-    );
-  }
 }

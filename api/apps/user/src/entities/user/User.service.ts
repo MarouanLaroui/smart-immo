@@ -1,11 +1,13 @@
-import User from './mongo/UserModel';
+import UserModel from './database/UserModel';
+import User from './database/UserModel';
+import UserDTO from './dto/CreateUserDTO';
 
 export default class UserService {
-  static async getUsers() {
-    return await User.find();
+  static getUsers() {
+    return UserModel.find({});
   }
 
-  static async createNewUser() {
-    //return await User.;
+  static createNewUser(userToCreate: UserDTO) {
+    return UserModel.create(userToCreate);
   }
 }
