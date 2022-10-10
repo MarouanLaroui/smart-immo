@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
+import userRouter from './routes/private/userRouter';
 
 /**
  * On créé une nouvelle "application" express
@@ -40,7 +41,7 @@ if (process.env.MONGO_URI) {
 /**
  * Homepage (uniquement necessaire pour cette demo)
  */
-app.get('/', (req, res) => res.send('🏠'));
+app.get('/auth', userRouter);
 
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur
