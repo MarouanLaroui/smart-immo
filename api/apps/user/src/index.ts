@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routes/private/userRouter';
+import authRouter from './routes/public/authRouter';
 
 /**
  * On créé une nouvelle "application" express
@@ -43,7 +44,7 @@ if (process.env.MONGO_URI) {
  */
 app.use('/users', userRouter);
 
-app.get('/test', (req, res) => res.send('coucou'));
+app.use('/auth', authRouter);
 
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur

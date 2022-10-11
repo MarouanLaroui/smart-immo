@@ -1,6 +1,6 @@
-import { model } from 'mongoose';
-import IUser from '../User';
+import { Model, model } from 'mongoose';
+import IUser from '../IUser';
 import userSchema from './UserSchema';
 
-const UserModel = model<IUser>('User', userSchema);
-export default UserModel;
+const User: Model<IUser> = model<IUser>('User', userSchema);
+export default User;

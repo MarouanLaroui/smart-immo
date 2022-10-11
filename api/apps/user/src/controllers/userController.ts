@@ -1,8 +1,8 @@
 import { validate } from 'class-validator';
 import { Request, Response } from 'express';
-import User from '../entities/user/User';
+import User from '../entities/user/IUser';
 import UserService from '../entities/user/User.service';
-import CreateUserDTO from '../entities/user/dto/CreateUserDTO';
+import CreateUserDTO from '../entities/user/dtos/CreateUserDTO';
 
 const getAllUsers = async (req: Request, res: Response) => {
   res.send(await UserService.getUsers());
