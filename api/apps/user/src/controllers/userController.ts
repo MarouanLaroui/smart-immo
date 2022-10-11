@@ -24,10 +24,10 @@ const createNewUser = async (req: Request, res: Response) => {
   const errors = await validate(userToCreate);
 
   if (errors && errors.length > 0) {
-    res.send(errors);
+    res.status(400).send(errors);
   } else {
     const result = await UserService.createNewUser(userToCreate);
-    res.send(result);
+    res.status(201).send(result);
   }
 };
 

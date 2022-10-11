@@ -25,9 +25,8 @@ export default class CreateUserDTO {
   @IsNotEmpty()
   email: string;
 
-  @IsOptional()
   @IsString()
-  @Matches('')
+  //@Matches('')
   password: string;
 
   constructor(

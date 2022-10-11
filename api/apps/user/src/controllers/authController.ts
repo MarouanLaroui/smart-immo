@@ -31,12 +31,21 @@ const login = async (req: Request, res: Response) => {
       .send('No user found with this email/password combination');
   }
 
+  const secret = process.env.JWT_SECRET;
+
+  if (!secret) {
+    return res.status(500).send('There was a problem while loging in');
+  }
+
   const token = jwt.sign(
     {
       id: user._id,
       email: user.email,
     },
-    process.env.JWT_SECRET!
+    secret!,
+    {
+      expiresIn: 900,
+    }
   );
 
   return res.send({ token: token });
