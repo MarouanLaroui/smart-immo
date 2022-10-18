@@ -6,7 +6,7 @@ const userRouter = express.Router();
 
 userRouter.post('/', (req, res) => createNewUser(req, res));
 
-userRouter.use(authenticationMiddleware);
+//userRouter.use(authenticationMiddleware);
 userRouter.get('/', (req, res) => getAllUsers(req, res));
 
 export default userRouter;

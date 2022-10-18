@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routes/private/userRouter';
 import authRouter from './routes/public/authRouter';
-
+import dotenv from 'dotenv';
 /**
  * On créé une nouvelle "application" express
  */
@@ -19,14 +19,19 @@ app.use(express.json());
 /**
  * On demande une connection avec MongoDB
  */
-require('dotenv').config();
+dotenv.config();
 
 if (process.env.MONGO_URI) {
   mongoose
     .connect(process.env.MONGO_URI)
-    .catch((err) => console.log(err))
-    .then(() => console.log('successfully connected to DB'));
+    .then(() => console.log('successfully connected to DB'))
+    .catch((err) => console.log(err));
 }
+
+// app.get('/test', (req, res) => {
+//   console.log('INSIDE ///');
+//   res.send('USER MS');
+// });
 
 /**
  * On dit à Express que l'on souhaite autoriser tous les noms de domaines
@@ -40,11 +45,16 @@ if (process.env.MONGO_URI) {
 //app.use("/pets", PetsController);
 
 /**
- * Homepage (uniquement necessaire pour cette demo)
+ * Homepage (uniquement necessaire pour
+ * cette demo)
  */
-app.use('/users', userRouter);
 
-app.use('/auth', authRouter);
+// app.get('/', (req, res) => {
+//   res.send('test');
+// });
+app.use('/api/v1/users', userRouter);
+
+// app.use('/api/v1/auth', authRouter);
 
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur
@@ -60,4 +70,4 @@ app.use('/auth', authRouter);
 /**
  * On demande à Express d'ecouter les requêtes sur le port défini dans la config
  */
-app.listen(3000, () => console.log('Server is running'));
+app.listen(3001, () => console.log('Server is running'));
