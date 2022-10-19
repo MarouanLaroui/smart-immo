@@ -4,9 +4,9 @@ import authenticationMiddleware from '~~/src/middlewares/authenticationMiddlewar
 
 const userRouter = express.Router();
 
-userRouter.post('/', (req, res) => createNewUser(req, res));
+userRouter.post('/', createNewUser);
 
-//userRouter.use(authenticationMiddleware);
-userRouter.get('/', (req, res) => getAllUsers(req, res));
+userRouter.use(authenticationMiddleware);
+userRouter.get('/', getAllUsers);
 
 export default userRouter;
