@@ -70,4 +70,4 @@ app.use('/api/v1/users', userRouter);
 /**
  * On demande à Express d'ecouter les requêtes sur le port défini dans la config
  */
-app.listen(3001, () => console.log('Server is running'));
+app.listen(3001, () => console.log('SmartImmo user microservice is running'));
