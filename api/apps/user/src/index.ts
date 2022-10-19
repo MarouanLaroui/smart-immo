@@ -1,9 +1,7 @@
-import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
-import userRouter from './routes/private/userRouter';
-import authRouter from './routes/public/authRouter';
 import dotenv from 'dotenv';
+import generalRouterV1 from './routes';
 /**
  * On créé une nouvelle "application" express
  */
@@ -28,21 +26,11 @@ if (process.env.MONGO_URI) {
     .catch((err) => console.log(err));
 }
 
-// app.get('/test', (req, res) => {
-//   console.log('INSIDE ///');
-//   res.send('USER MS');
-// });
-
 /**
  * On dit à Express que l'on souhaite autoriser tous les noms de domaines
  * à faire des requêtes sur notre API.
  */
 //app.use(cors());
-
-/**
- * Toutes les routes CRUD pour les animaux seronts préfixées par `/pets`
- */
-//app.use("/pets", PetsController);
 
 /**
  * Homepage (uniquement necessaire pour
@@ -52,9 +40,7 @@ if (process.env.MONGO_URI) {
 // app.get('/', (req, res) => {
 //   res.send('test');
 // });
-app.use('/api/v1/users', userRouter);
-
-// app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/', generalRouterV1);
 
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur

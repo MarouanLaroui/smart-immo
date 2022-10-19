@@ -1,6 +1,6 @@
 import express from 'express';
-import authRouter from './user/authRouter';
-import userRouter from './user/userRouter';
+import userRouter from './private/userRouter';
+import authRouter from './public/authRouter';
 
 const generalRouterV1 = express.Router();
 
