@@ -6,12 +6,13 @@ const currateUrlMiddleware = (
   next: NextFunction
 ) => {
   const url: string = req.body.url;
-  if (!url) {
-    res.status(400).send('URL missing in request body');
+
+  if (!url || url.length <= 0) {
+    return res.status(400).send('URL missing in request body.');
   }
 
   let curratedUrl = url;
-  if (url.includes('https')) {
+  if (url.startsWith('https')) {
     curratedUrl = url.split('https://')[1];
   }
 
