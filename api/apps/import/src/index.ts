@@ -33,4 +33,4 @@ app.use('/api/v1/import', generalRouterV1);
  */
 //app.use(ExceptionsHandler);
 
-app.listen(3000, () => console.log('SmartImmo import microservice is running'));
+app.listen(3003, () => console.log('SmartImmo import microservice is running'));
