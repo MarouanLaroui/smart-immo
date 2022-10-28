@@ -12,23 +12,15 @@ const getOneUser = (req: Request, res: Response) => {
   res.send('Get an existing workout');
 };
 
-const createNewUser = async (req: Request, res: Response) => {
-  const userToCreate = new CreateUserDTO(
-    req.body.firstname,
-    req.body.lastname,
-    req.body.birthdate,
-    req.body.email,
-    req.body.password
-  );
-
-  const errors = await validate(userToCreate);
-
-  if (errors && errors.length > 0) {
-    res.status(400).send(errors);
-  } else {
-    const result = await UserService.createNewUser(userToCreate);
-    res.status(201).send(result);
+const createNewUser = async (
+  req: Request<any, any, CreateUserDTO>,
+  res: Response
+) => {
+  const result = await UserService.createNewUser(req.body);
+  if (!result) {
+    return res.send(400).send('User creation failed');
   }
+  return res.status(200).send(result);
 };
 
 const updateOneUser = (req: Request, res: Response) => {

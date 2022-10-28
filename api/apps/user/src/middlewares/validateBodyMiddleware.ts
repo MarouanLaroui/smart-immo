@@ -3,18 +3,24 @@ import { transformAndValidate } from 'class-transformer-validator';
 
 const validateBody = <T>(
   parameter: T,
-  req: Request,
-  res: Response,
-  next: NextFunction
+  errorHandler?: (
+    err: any,
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => void
 ) => {
-  transformAndValidate(parameter as any, req.body)
-    .then((transformedBody) => {
-      req.body = transformedBody;
-      next();
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    });
+  return (req: Request, res: Response, next: NextFunction) => {
+    console.log('-----------------test---------------');
+    transformAndValidate(parameter as any, req.body)
+      .then((transformedBody) => {
+        req.body = transformedBody;
+        next();
+      })
+      .catch((error) => {
+        return res.status(400).send(error);
+      });
+  };
 };
 
 export default validateBody;

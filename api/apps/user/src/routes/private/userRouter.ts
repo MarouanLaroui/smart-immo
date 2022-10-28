@@ -6,7 +6,7 @@ import validateBody from '~~/src/middlewares/validateBodyMiddleware';
 
 const userRouter = express.Router();
 
-userRouter.post('/', validateBody<CreateUserDTO>, createNewUser);
+userRouter.post('/', validateBody(CreateUserDTO), createNewUser);
 
 userRouter.use(authenticationMiddleware);
 userRouter.get('/', getAllUsers);
