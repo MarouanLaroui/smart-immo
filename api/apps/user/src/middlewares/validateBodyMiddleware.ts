@@ -11,7 +11,6 @@ const validateBody = <T>(
   ) => void
 ) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    console.log('-----------------test---------------');
     transformAndValidate(parameter as any, req.body)
       .then((transformedBody) => {
         req.body = transformedBody;
