@@ -1,5 +1,4 @@
 import express from 'express';
-import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import getProxyMiddleware from '~~/src/middlewares/proxyMiddleware';
 
 const userRouter = express.Router();
