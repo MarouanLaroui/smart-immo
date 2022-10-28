@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Request, Response } from 'express';
-import { RealEstateAdDTO } from '../types/realEstateAd.type';
 
 const importRealEstateFromBienIci = async (req: Request, res: Response) => {
   const url = req.body.url;
@@ -11,11 +10,11 @@ const importRealEstateFromBienIci = async (req: Request, res: Response) => {
     return res.status(400).send('URL split length is < 7');
   }
 
-  console.log(metadata);
   const id = metadata[6].split('?')[0]; // id is always here
   const bienIciApiUri = process.env.BIEN_ICI_API_URI_FIND_ONE;
 
   if (!bienIciApiUri) {
+    console.error('BIEN_ICI_API_URI_FIND_ONE env var is undefined');
     return res.status(500);
   }
 
