@@ -1,8 +1,7 @@
-import { validate } from 'class-validator';
 import { Request, Response } from 'express';
-import User from '../entities/user/IUser';
 import UserService from '../entities/user/User.service';
 import CreateUserDTO from '../entities/user/dtos/CreateUserDTO';
+import IAuthenticatedRequest from '../utils/IAuthenticatedRequest';
 
 const getAllUsers = async (req: Request, res: Response) => {
   res.send(await UserService.getUsers());
@@ -27,8 +26,19 @@ const updateOneUser = (req: Request, res: Response) => {
   res.send('Update an existing workout');
 };
 
-const deleteOneUser = (req: Request, res: Response) => {
-  res.send('Delete an existing workout');
+const deleteMyAccount = async (req: IAuthenticatedRequest, res: Response) => {
+  const userId = req.body.user.userId;
+  const deletedUser = await UserService.deleteUser(userId);
+  if (!deletedUser) {
+    return res.status(500).send('Deletion failed');
+  }
+  res.status(200).send('User deleted successfully');
 };
 
-export { getAllUsers, getOneUser, createNewUser, updateOneUser, deleteOneUser };
+export {
+  getAllUsers,
+  getOneUser,
+  createNewUser,
+  updateOneUser,
+  deleteMyAccount,
+};
