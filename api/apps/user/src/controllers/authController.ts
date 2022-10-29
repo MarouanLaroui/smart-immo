@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import UserService from '../entities/user/User.service';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import IToken from '../entities/user/interfaces/IToken';
 
 const login = async (req: Request, res: Response) => {
   const email = req.body.email;
@@ -15,7 +16,7 @@ const login = async (req: Request, res: Response) => {
     return res.status(400).send('No password found');
   }
 
-  const user = await UserService.getOneUser(email);
+  const user = await UserService.getOneUserByEmail(email);
 
   if (!user) {
     return res
@@ -36,17 +37,16 @@ const login = async (req: Request, res: Response) => {
   if (!secret) {
     return res.status(500).send('There was a problem while loging in');
   }
-
-  const token = jwt.sign(
-    {
-      id: user._id,
+  const tokenBody: IToken = {
+    user: {
+      userId: user._id,
       email: user.email,
     },
-    secret!,
-    {
-      expiresIn: 900,
-    }
-  );
+  };
+
+  const token = jwt.sign(tokenBody, secret!, {
+    expiresIn: 900,
+  });
 
   return res.send({ token: token });
 };

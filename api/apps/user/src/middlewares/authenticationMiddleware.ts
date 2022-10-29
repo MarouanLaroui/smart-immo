@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import IToken from '../entities/user/interfaces/IToken';
+import UserService from '../entities/user/User.service';
 
 const authenticationMiddleware = async (
   req: Request,
@@ -12,7 +14,9 @@ const authenticationMiddleware = async (
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET!);
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET!) as IToken;
+    const user = UserService.getOneUser(decodedToken.user.userId);
+    req.body.user = user;
   } catch (err) {
     return res.status(400).send('Invalid token');
   }
