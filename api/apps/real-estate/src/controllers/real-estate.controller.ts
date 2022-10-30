@@ -11,6 +11,38 @@ const getOneRealEstate = (req: Request, res: Response) => {
   res.send('Get an existing workout');
 };
 
+const createRealEstateFromImport = async (
+  realEstateToSave: CreateRealEstateDTO
+) => {
+  const realEstateToCreate = new CreateRealEstateDTO(
+    realEstateToSave.url,
+    realEstateToSave.relativeId,
+    realEstateToSave.title,
+    realEstateToSave.description,
+    realEstateToSave.city,
+    realEstateToSave.postalCode,
+    realEstateToSave.price,
+    realEstateToSave.surfaceArea,
+    realEstateToSave.roomsQuantity,
+    realEstateToSave.condominiumCharges,
+    realEstateToSave.avgAnnualEnergyCharges,
+    realEstateToSave.energyPerformanceDiagnosticValue,
+    realEstateToSave.energyPerformanceDiagnosticGrade,
+    realEstateToSave.greenhouseGazEmissionDiagnosticValue,
+    realEstateToSave.greenhouseGazEmissionDiagnosticGrade
+  );
+
+  const errors = await validate(realEstateToCreate);
+
+  if (!errors) {
+    const result = await RealEstateService.createNewRealEstate(
+      realEstateToCreate
+    );
+    console.log('success');
+    return 'success';
+  }
+};
+
 const createRealEstate = async (req: Request, res: Response) => {
   const realEstateToCreate = new CreateRealEstateDTO(
     req.body.url,
@@ -54,6 +86,7 @@ export {
   getAllRealEstate,
   getOneRealEstate,
   createRealEstate,
+  createRealEstateFromImport,
   updateOneRealEstate,
   deleteOneRealEstate,
 };

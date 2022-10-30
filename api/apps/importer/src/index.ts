@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import generalRouterV1 from './routes';
+import { connectKafkaProducer } from './kafka/kafka-producer';
 
 /**
  * On créé une nouvelle "application" express
@@ -21,6 +22,8 @@ app.use(express.json());
  */
 //app.use(cors());
 app.use('/api/v1/import', generalRouterV1);
+
+connectKafkaProducer();
 
 /**
  * Pour toutes les autres routes non définies, on retourne une erreur

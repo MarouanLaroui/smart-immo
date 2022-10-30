@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es2017",
-    "module": "CommonJS",
+    "target": "ES2022",
+    "module": "ES2022",
     "lib": ["esnext"],
     "moduleResolution": "node",
     "esModuleInterop": true,

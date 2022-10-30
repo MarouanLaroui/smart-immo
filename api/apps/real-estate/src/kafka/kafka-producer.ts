@@ -1,20 +1,18 @@
+import { Producer } from 'kafkajs';
 import kafka from './kafka-client';
 
-const producer = kafka.producer();
+let kafkaProducer: Producer = kafka.producer();
 
-async function kafkaTest() {
+const connectKafkaProducer = async () => {
   console.log('Producer connection to Kafka..');
-  await producer.connect();
+  await kafkaProducer.connect();
   console.log('Consumer connected !');
-  await producer.send({
-    topic: 'test-topic',
-    messages: [{ value: 'Ruby the cat' }],
-  });
-  await producer.send({
-    topic: 'test-topic',
-    messages: [{ value: 'Mongo the dog' }],
-  });
-  await producer.disconnect();
-}
+};
 
-export default kafkaTest;
+const getKafkaProducer = () => {
+  return kafkaProducer;
+};
+
+//await producer.disconnect();
+
+export { connectKafkaProducer, getKafkaProducer };

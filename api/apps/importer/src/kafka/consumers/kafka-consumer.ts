@@ -1,5 +1,5 @@
 import { Kafka } from 'kafkajs';
-import kafka from './kafka-client';
+import kafka from '../kafka-client';
 
 export default async function consumeKafka() {
   const consumer = kafka.consumer({ groupId: 'test-group' });

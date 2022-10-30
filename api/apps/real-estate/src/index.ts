@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import generalRouterV1 from './routes';
+import { connectKafkaProducer } from './kafka/kafka-producer';
 /**
  * On créé une nouvelle "application" express
  */
@@ -26,6 +27,7 @@ if (process.env.MONGO_URI) {
     .catch((err) => console.log(err));
 }
 
+connectKafkaProducer();
 /**
  * On dit à Express que l'on souhaite autoriser tous les noms de domaines
  * à faire des requêtes sur notre API.
