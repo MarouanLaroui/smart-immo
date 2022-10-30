@@ -11,7 +11,6 @@ const importRealEstateFromBienIci = async (req: Request, res: Response) => {
     return res.status(400).send('URL split length is < 7');
   }
 
-  console.log(metadata);
   const id = metadata[6].split('?')[0]; // id is always here
   const bienIciApiUri = process.env.BIEN_ICI_API_URI_FIND_ONE;
 
@@ -29,7 +28,7 @@ const importRealEstateFromBienIci = async (req: Request, res: Response) => {
 
   const data = realEstateAd.data;
 
-  res.status(200).send({
+  const formatedRealEstateAd: RealEstateAdDTO = {
     url: url,
     relativeId: id,
     title: data.title,
@@ -39,7 +38,9 @@ const importRealEstateFromBienIci = async (req: Request, res: Response) => {
     price: data.price,
     surfaceArea: data.surfaceArea,
     roomsQuantity: data.roomsQuantity,
-  });
+  };
+
+  res.status(200).send({ formatedRealEstateAd });
 };
 
 export default importRealEstateFromBienIci;
